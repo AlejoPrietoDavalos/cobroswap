@@ -2,6 +2,7 @@ from typing import Literal
 import os
 
 import requests
+from requests import Response
 
 CobroswapCurrency = Literal["UYU"]
 
@@ -18,10 +19,13 @@ def _get_json_create_payment_link(*, amount: float, currency: CobroswapCurrency)
         "companyId": os.getenv("COMPANY_ID")                    # FIXME: Dato sensible?
     }
 
-def create_payment_link(*, amount: float, currency: CobroswapCurrency) -> str | None:
+def response_create_payment_link(*, amount: float, currency: CobroswapCurrency) -> Response:
     url = url_create_payment_link()
     json_ = _get_json_create_payment_link(amount=amount, currency=currency)
-    r = requests.post(url=url, json=json_)
+    return requests.post(url=url, json=json_)
+
+def create_payment_link(*, amount: float, currency: CobroswapCurrency) -> str | None:
+    r = response_create_payment_link(amount=amount, currency=currency)
     if not(200 <= r.status_code <= 299):
         return None
     url_payment = r.json()["paymentLink"]["url"]
