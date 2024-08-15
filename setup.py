@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 setup(
     name = "cobroswap",
-    version = "0.0.2",
+    version = "0.0.3",
     author = "Alejo Prieto Dávalos",
     author_email = "alejoprietodavalos@gmail.com",
     packages = find_packages(),
@@ -16,7 +16,8 @@ setup(
     },
     python_requires = ">=3.11",
     install_requires = [
-        "requests>=2.32.0"
+        "requests>=2.32.0",
+        "pydantic>=2.8.2"
     ],
     include_package_data = True
 )
