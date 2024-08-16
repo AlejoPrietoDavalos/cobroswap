@@ -1,9 +1,12 @@
+from typing import TypeVar
+
 from cobroswap.payment_link import create_payment_link
 from cobroswap.models import (
     CobrosWapJSON, ResponseCobrosWap, CobroswapCurrency,
     DEFAULT_CURRENCY, DEFAULT_CONCEPT
 )
 
+T_CobrosWap = TypeVar("T_CobrosWap", bound="CobrosWap")
 
 class CobrosWap:
     def __init__(self, *, company_id: str):
